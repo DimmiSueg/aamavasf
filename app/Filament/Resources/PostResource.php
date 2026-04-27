@@ -18,7 +18,7 @@ class PostResource extends Resource
     protected static ?string $navigationLabel = 'Posts do Blog';
     protected static ?string $modelLabel = 'Post';
     protected static ?string $pluralModelLabel = 'Posts do Blog';
-    protected static ?string $navigationGroup = 'Conteúdo';
+    protected static \UnitEnum|string|null $navigationGroup = 'Conteúdo';
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form

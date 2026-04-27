@@ -17,7 +17,7 @@ class MemberResource extends Resource
     protected static ?string $navigationLabel = 'Associados';
     protected static ?string $modelLabel = 'Associado';
     protected static ?string $pluralModelLabel = 'Associados';
-    protected static ?string $navigationGroup = 'Associados';
+    protected static \UnitEnum|string|null $navigationGroup = 'Associados';
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
