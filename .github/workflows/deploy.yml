@@ -78,7 +78,8 @@ jobs:
           port: ${{ secrets.VPS_PORT || 22 }}
           script: |
             cd /home/aamavasf.com.br
-            ln -sfn /home/aamavasf.com.br/public /home/aamavasf.com.br/public_html
+            rm -rf /home/aamavasf.com.br/public_html
+            ln -sf /home/aamavasf.com.br/public /home/aamavasf.com.br/public_html
             /usr/local/lsws/lsphp83/bin/php artisan down --retry=15
             /usr/local/lsws/lsphp83/bin/php artisan migrate --force
             /usr/local/lsws/lsphp83/bin/php artisan optimize:clear
