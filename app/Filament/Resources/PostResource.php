@@ -32,7 +32,7 @@ class PostResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn ($state, Forms\Set $set) =>
+                    ->afterStateUpdated(fn ($state, Schemas\Components\Utilities\Set $set) =>
                         $set('slug', Str::slug($state))),
 
                 Forms\Components\TextInput::make('slug')
