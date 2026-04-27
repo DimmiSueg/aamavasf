@@ -21,15 +21,18 @@ jobs:
           extensions: pdo, pgsql, pdo_pgsql, mbstring, xml, bcmath, gd
           coverage: none
 
-      - name: Cache Composer
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
+      - name: Atualizar composer.lock e instalar dependências PHP
+        run: |
+          composer update --no-dev --optimize-autoloader --no-interaction --prefer-dist
+          composer dump-autoload --optimize
 
-      - name: Instalar dependências PHP
-        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+      - name: Commit composer.lock atualizado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add composer.lock
+          git diff --staged --quiet || git commit -m "chore: atualizar composer.lock [skip ci]"
+          git push || true
 
       - name: Setup Node 20
         uses: actions/setup-node@v4
