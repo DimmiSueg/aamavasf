@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+@source '../**/*.blade.php';
+@source '../**/*.vue';
+@source '../**/*.js';
+
+@theme {
+    --color-primary: #1B2A6B;
+    --color-primary-light: #2D3AB0;
+    --color-accent: #F59E0B;
+    --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+    html { scroll-behavior: smooth; }
+}
+
+@layer components {
+    .btn-primary {
+        @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-bold transition-all duration-200 focus:outline-none focus:ring-4 bg-[#1B2A6B] text-white hover:bg-[#2D3AB0];
+    }
+    .btn-secondary {
+        @apply inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white text-white font-bold transition-all duration-200 hover:bg-white hover:text-[#1B2A6B];
+    }
+    .section-title {
+        @apply text-3xl md:text-4xl font-extrabold mb-4 text-[#1B2A6B];
+    }
+    .section-subtitle {
+        @apply text-lg text-gray-600 max-w-2xl mx-auto;
+    }
+    .card {
+        @apply bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg;
+    }
+}

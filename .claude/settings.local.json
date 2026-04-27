@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npx create-payload-app@latest . --template blank --db postgres --no-git)",
+      "Bash(npx create-payload-app@latest --help)",
+      "Bash(npm install *)",
+      "Bash(where npm *)",
+      "Bash(where node *)",
+      "Bash(composer --version)",
+      "Bash(php --version)",
+      "PowerShell(composer --version)",
+      "PowerShell(php --version)",
+      "PowerShell($herdPath = \"C:\\\\Users\\\\dimmi\\\\CONFIG~2\\\\herd\"; if \\(Test-Path $herdPath\\) { Get-ChildItem $herdPath } else { Write-Host \"nao encontrado\" }; $herdPath2 = \"$env:USERPROFILE\\\\AppData\\\\Local\\\\Programs\\\\Herd\"; if \\(Test-Path $herdPath2\\) { Get-ChildItem $herdPath2 } else { Write-Host \"nao encontrado 2\" })",
+      "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\" | Select-Object Name, FullName)",
+      "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\" -Recurse | Select-Object FullName | head -20; Get-ChildItem \"$env:USERPROFILE\\\\.config\\\\herd\\\\config\" | Select-Object Name)",
+      "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\" -Recurse | Select-Object -First 20 FullName)",
+      "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\" -Recurse -File | Select-Object FullName)",
+      "PowerShell(& \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\\\\php.bat\" --version; & \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\\\\composer.bat\" --version)",
+      "PowerShell($php = \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\\\\php.bat\"; $composer = \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\\\\composer.phar\"; $dir = \"C:\\\\Users\\\\dimmi\\\\OneDrive\\\\ProjetosTI\\\\AtosSofts\\\\Clientes\\\\AAMAVASF\\\\WEBSITE_CRM_CMS\"; & $php $composer create-project laravel/laravel $dir --no-interaction 2>&1)",
+      "PowerShell($php = \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\\\\php.bat\"; $composer = \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\\\\composer.phar\"; $target = \"C:\\\\Users\\\\dimmi\\\\OneDrive\\\\ProjetosTI\\\\AtosSofts\\\\Clientes\\\\AAMAVASF\\\\WEBSITE_CRM_CMS\\\\laravel-tmp\"; & $php $composer create-project laravel/laravel $target --no-interaction 2>&1 | Select-String -NotMatch \"Warning|Unable to load\")",
+      "PowerShell($dir = \"C:\\\\Users\\\\dimmi\\\\OneDrive\\\\ProjetosTI\\\\AtosSofts\\\\Clientes\\\\AAMAVASF\\\\WEBSITE_CRM_CMS\\\\laravel-tmp\"; New-Item -ItemType Directory -Force \"$dir\\\\bootstrap\\\\cache\" | Out-Null; New-Item -ItemType Directory -Force \"$dir\\\\storage\\\\framework\\\\sessions\" | Out-Null; New-Item -ItemType Directory -Force \"$dir\\\\storage\\\\framework\\\\views\" | Out-Null; New-Item -ItemType Directory -Force \"$dir\\\\storage\\\\framework\\\\cache\" | Out-Null; $php = \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\\\\php.bat\"; & $php \"$dir\\\\artisan\" package:discover --ansi 2>&1 | Select-String -NotMatch \"Warning|Unable to load\")",
+      "PowerShell($basePath = \"C:\\\\Users\\\\dimmi\\\\OneDrive\\\\ProjetosTI\\\\AtosSofts\\\\Clientes\\\\AAMAVASF\\\\WEBSITE_CRM_CMS\\\\laravel-tmp\"; $folders = @\\(\"bootstrap\\\\cache\", \"storage\", \"storage\\\\logs\", \"storage\\\\framework\", \"storage\\\\framework\\\\sessions\", \"storage\\\\framework\\\\views\", \"storage\\\\framework\\\\cache\", \"storage\\\\framework\\\\cache\\\\data\"\\); foreach \\($f in $folders\\) { $fullPath = Join-Path $basePath $f; if \\(Test-Path $fullPath\\) { icacls $fullPath /remove:d \"Todos\" /T /Q 2>&1 | Out-Null } }; Write-Host \"ACL corrigida\")",
+      "PowerShell($php = \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\\\\php.bat\"; $dir = \"C:\\\\Users\\\\dimmi\\\\OneDrive\\\\ProjetosTI\\\\AtosSofts\\\\Clientes\\\\AAMAVASF\\\\WEBSITE_CRM_CMS\\\\laravel-tmp\"; & $php \"$dir\\\\artisan\" package:discover --ansi 2>&1 | Select-String -NotMatch \"Warning|Unable to load\")",
+      "PowerShell($bat = Get-Content \"$env:USERPROFILE\\\\.config\\\\herd\\\\bin\\\\php.bat\"; Write-Host $bat)",
+      "PowerShell(Get-Command php, composer, laravel -ErrorAction SilentlyContinue)",
+      "PowerShell($env:PATH -split \";\" | Where-Object { $_ -ne \"\" } | ForEach-Object { if \\(Test-Path $_\\) { $_ } })",
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(git add *)"
+    ]
+  }
+}
