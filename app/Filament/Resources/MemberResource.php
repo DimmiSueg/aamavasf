@@ -67,16 +67,22 @@ class MemberResource extends Resource
                 Tables\Columns\TextColumn::make('name')->label('Nome')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('email')->label('E-mail')->searchable(),
                 Tables\Columns\TextColumn::make('phone')->label('WhatsApp'),
-                Tables\Columns\BadgeColumn::make('role')
+                Tables\Columns\TextColumn::make('role')
                     ->label('Tipo')
+                    ->badge()
                     ->formatStateUsing(fn ($state) => match($state) {
                         'family' => 'Familiar', 'volunteer' => 'Voluntário',
                         'health_pro' => 'Saúde', 'educator' => 'Educador',
                         'partner' => 'Parceiro', 'donor' => 'Doador', default => 'Outro',
                     }),
-                Tables\Columns\BadgeColumn::make('status')
+                Tables\Columns\TextColumn::make('status')
                     ->label('Status')
-                    ->colors(['warning' => 'pending', 'success' => 'approved', 'danger' => 'rejected']),
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'approved' => 'success',
+                        'rejected' => 'danger',
+                        default => 'warning',
+                    }),
                 Tables\Columns\TextColumn::make('created_at')->label('Cadastrado em')->dateTime('d/m/Y')->sortable(),
             ])
             ->defaultSort('created_at', 'desc')

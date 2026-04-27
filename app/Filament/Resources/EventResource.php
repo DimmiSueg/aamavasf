@@ -91,13 +91,14 @@ class EventResource extends Resource
                 Tables\Columns\TextColumn::make('date')->label('Data')->dateTime('d/m/Y H:i')->sortable(),
                 Tables\Columns\TextColumn::make('location')->label('Local'),
                 Tables\Columns\IconColumn::make('is_free')->label('Gratuito')->boolean(),
-                Tables\Columns\BadgeColumn::make('status')
+                Tables\Columns\TextColumn::make('status')
                     ->label('Status')
-                    ->colors([
-                        'success' => 'scheduled',
-                        'secondary' => 'done',
-                        'danger' => 'cancelled',
-                    ]),
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'scheduled' => 'success',
+                        'cancelled' => 'danger',
+                        default => 'gray',
+                    }),
             ])
             ->defaultSort('date')
             ->filters([

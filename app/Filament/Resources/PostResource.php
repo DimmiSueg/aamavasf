@@ -90,10 +90,14 @@ class PostResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('featured_image')->label('Imagem'),
                 Tables\Columns\TextColumn::make('title')->label('Título')->searchable()->sortable(),
-                Tables\Columns\BadgeColumn::make('category')->label('Categoria'),
-                Tables\Columns\BadgeColumn::make('status')
+                Tables\Columns\TextColumn::make('category')->label('Categoria')->badge(),
+                Tables\Columns\TextColumn::make('status')
                     ->label('Status')
-                    ->colors(['warning' => 'draft', 'success' => 'published']),
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'published' => 'success',
+                        default => 'warning',
+                    }),
                 Tables\Columns\TextColumn::make('published_at')
                     ->label('Publicado em')
                     ->dateTime('d/m/Y H:i')
