@@ -14,7 +14,7 @@ class MemberResource extends Resource
 {
     protected static ?string $model = Member::class;
     protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-users';
-    protected static \BackedEnum|string|null $navigationLabel = 'Associados';
+    protected static ?string $navigationLabel = 'Associados';
     protected static ?string $modelLabel = 'Associado';
     protected static ?string $pluralModelLabel = 'Associados';
     protected static \UnitEnum|string|null $navigationGroup = 'Associados';

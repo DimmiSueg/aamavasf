@@ -15,7 +15,7 @@ class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
     protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-document-text';
-    protected static \BackedEnum|string|null $navigationLabel = 'Posts do Blog';
+    protected static ?string $navigationLabel = 'Posts do Blog';
     protected static ?string $modelLabel = 'Post';
     protected static ?string $pluralModelLabel = 'Posts do Blog';
     protected static \UnitEnum|string|null $navigationGroup = 'Conteúdo';
