@@ -83,6 +83,7 @@ jobs:
           /usr/local/lsws/lsphp83/bin/php artisan migrate --force
           /usr/local/lsws/lsphp83/bin/php artisan optimize:clear
           /usr/local/lsws/lsphp83/bin/php artisan optimize
+          /usr/local/lsws/lsphp83/bin/php artisan filament:assets
           /usr/local/lsws/lsphp83/bin/php artisan storage:link --force
           sudo /usr/local/lsws/bin/lswsctrl restart
           /usr/local/lsws/lsphp83/bin/php artisan up
