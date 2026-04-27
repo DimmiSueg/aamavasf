@@ -8,7 +8,7 @@ jobs:
   deploy:
     name: Deploy para VPS
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout código
@@ -46,14 +46,33 @@ jobs:
       - name: Build assets (Vite)
         run: npm run build
 
-      - name: Deploy via SSH
+      - name: Enviar arquivos para VPS via rsync
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avz --delete --exclude='.env' --exclude='.git' --exclude='Assets_sources' --exclude='node_modules' --exclude='storage/logs' --exclude='storage/framework'
+          path: ./
+          remote_path: /var/www/aamavasf.com.br
+          remote_host: ${{ secrets.VPS_HOST }}
+          remote_port: ${{ secrets.VPS_PORT || 22 }}
+          remote_user: ${{ secrets.VPS_USER }}
+          remote_key: ${{ secrets.VPS_SSH_KEY }}
+
+      - name: Executar pós-deploy na VPS
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT || 22 }}
-          script: /var/www/aamavasf.com.br/deploy.sh
+          script: |
+            cd /var/www/aamavasf.com.br
+            /usr/local/lsws/lsphp83/bin/php artisan down --retry=15
+            /usr/local/lsws/lsphp83/bin/php artisan migrate --force
+            /usr/local/lsws/lsphp83/bin/php artisan optimize:clear
+            /usr/local/lsws/lsphp83/bin/php artisan optimize
+            /usr/local/lsws/lsphp83/bin/php artisan storage:link --force
+            sudo /usr/local/lsws/bin/lswsctrl restart
+            /usr/local/lsws/lsphp83/bin/php artisan up
 
       - name: Notificar sucesso
         if: success()
