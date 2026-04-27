@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\EventResource\Pages;
 use App\Models\Event;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -105,9 +106,9 @@ class EventResource extends Resource
                 Tables\Filters\SelectFilter::make('status')
                     ->options(['scheduled' => 'Agendado', 'done' => 'Realizado', 'cancelled' => 'Cancelado']),
             ])
-            ->actions([Tables\Actions\EditAction::make()])
-            ->bulkActions([Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
+            ->actions([Actions\EditAction::make()])
+            ->bulkActions([Actions\BulkActionGroup::make([
+                Actions\DeleteBulkAction::make(),
             ])]);
     }
 

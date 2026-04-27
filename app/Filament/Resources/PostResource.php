@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
 use App\Models\Post;
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -107,9 +108,9 @@ class PostResource extends Resource
                 Tables\Filters\SelectFilter::make('status')
                     ->options(['draft' => 'Rascunho', 'published' => 'Publicado']),
             ])
-            ->actions([Tables\Actions\EditAction::make()])
-            ->bulkActions([Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
+            ->actions([Actions\EditAction::make()])
+            ->bulkActions([Actions\BulkActionGroup::make([
+                Actions\DeleteBulkAction::make(),
             ])]);
     }
 
