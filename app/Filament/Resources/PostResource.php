@@ -32,14 +32,20 @@ class PostResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn ($state, Schemas\Components\Utilities\Set $set) =>
-                        $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(function ($state, Schemas\Components\Utilities\Set $set, $record) {
+                        if ($record === null) {
+                            $set('slug', Str::slug($state));
+                        }
+                    }),
 
                 Forms\Components\TextInput::make('slug')
-                    ->label('Slug (URL)')
+                    ->label('URL do post')
                     ->required()
                     ->unique(ignoreRecord: true)
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->disabled()
+                    ->dehydrated()
+                    ->helperText('Gerado automaticamente. Nunca alterado para preservar links já compartilhados.'),
 
                 Forms\Components\Textarea::make('excerpt')
                     ->label('Resumo')
