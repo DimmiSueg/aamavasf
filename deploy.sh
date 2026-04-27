@@ -2,13 +2,14 @@
 set -e
 
 APP_DIR="/var/www/aamavasf.com.br"
+PHP="/usr/local/lsws/lsphp83/bin/php"
 
 echo "🚀 Iniciando deploy AAMAVASF..."
 
 cd "$APP_DIR"
 
 # Ativar modo manutenção
-php artisan down --retry=15 --secret="aamavasf-manutencao"
+$PHP artisan down --retry=15 --secret="aamavasf-manutencao"
 
 # Atualizar código
 git pull origin main
@@ -21,17 +22,17 @@ npm ci
 npm run build
 
 # Banco de dados
-php artisan migrate --force
+$PHP artisan migrate --force
 
 # Limpar e recriar caches de produção
-php artisan optimize:clear
-php artisan optimize
-php artisan storage:link --force
+$PHP artisan optimize:clear
+$PHP artisan optimize
+$PHP artisan storage:link --force
 
-# Reiniciar PHP-FPM
-sudo systemctl reload php8.3-fpm
+# OpenLiteSpeed: forçar reload do servidor para limpar opcode cache
+sudo /usr/local/lsws/bin/lswsctrl restart
 
 # Desativar modo manutenção
-php artisan up
+$PHP artisan up
 
 echo "✅ Deploy concluído com sucesso!"
