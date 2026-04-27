@@ -53,17 +53,17 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT || 22 }}
           script: |
-            mkdir -p /var/www/aamavasf.com.br
-            mkdir -p /var/www/aamavasf.com.br/storage/logs
-            mkdir -p /var/www/aamavasf.com.br/storage/framework/{cache,sessions,views,testing}
-            mkdir -p /var/www/aamavasf.com.br/bootstrap/cache
+            mkdir -p /home/aamavasf.com.br/storage/logs
+            mkdir -p /home/aamavasf.com.br/storage/framework/{cache,sessions,views,testing}
+            mkdir -p /home/aamavasf.com.br/storage/app/public
+            mkdir -p /home/aamavasf.com.br/bootstrap/cache
 
       - name: Enviar arquivos para VPS via rsync
         uses: burnett01/rsync-deployments@7.0.1
         with:
-          switches: -avz --delete --exclude='.env' --exclude='.git' --exclude='Assets_sources' --exclude='node_modules' --exclude='storage/logs' --exclude='storage/framework'
+          switches: -avz --delete --exclude='.env' --exclude='.git' --exclude='Assets_sources' --exclude='node_modules' --exclude='storage/logs' --exclude='storage/framework' --exclude='public_html'
           path: ./
-          remote_path: /var/www/aamavasf.com.br
+          remote_path: /home/aamavasf.com.br
           remote_host: ${{ secrets.VPS_HOST }}
           remote_port: ${{ secrets.VPS_PORT || 22 }}
           remote_user: ${{ secrets.VPS_USER }}
@@ -77,7 +77,8 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT || 22 }}
           script: |
-            cd /var/www/aamavasf.com.br
+            cd /home/aamavasf.com.br
+            ln -sfn /home/aamavasf.com.br/public /home/aamavasf.com.br/public_html
             /usr/local/lsws/lsphp83/bin/php artisan down --retry=15
             /usr/local/lsws/lsphp83/bin/php artisan migrate --force
             /usr/local/lsws/lsphp83/bin/php artisan optimize:clear
