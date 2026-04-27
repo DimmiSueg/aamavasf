@@ -13,8 +13,8 @@ use Filament\Tables\Table;
 class EventResource extends Resource
 {
     protected static ?string $model = Event::class;
-    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
-    protected static ?string $navigationLabel = 'Eventos';
+    protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-calendar-days';
+    protected static \BackedEnum|string|null $navigationLabel = 'Eventos';
     protected static ?string $modelLabel = 'Evento';
     protected static ?string $pluralModelLabel = 'Eventos';
     protected static \UnitEnum|string|null $navigationGroup = 'Conteúdo';
