@@ -5,8 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\MemberResource\Pages;
 use App\Models\Member;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -20,9 +20,9 @@ class MemberResource extends Resource
     protected static \UnitEnum|string|null $navigationGroup = 'Associados';
     protected static ?int $navigationSort = 1;
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema([
+        return $schema->components([
             Forms\Components\Section::make('Dados pessoais')->schema([
                 Forms\Components\TextInput::make('name')->label('Nome completo')->required(),
                 Forms\Components\TextInput::make('email')->label('E-mail')->email()->required(),

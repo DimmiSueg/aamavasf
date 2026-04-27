@@ -5,8 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EventResource\Pages;
 use App\Models\Event;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -20,9 +20,9 @@ class EventResource extends Resource
     protected static \UnitEnum|string|null $navigationGroup = 'Conteúdo';
     protected static ?int $navigationSort = 2;
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema([
+        return $schema->components([
             Forms\Components\Section::make('Informações do evento')->schema([
                 Forms\Components\TextInput::make('title')
                     ->label('Título')

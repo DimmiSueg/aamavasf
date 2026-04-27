@@ -5,8 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PostResource\Pages;
 use App\Models\Post;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
@@ -21,9 +21,9 @@ class PostResource extends Resource
     protected static \UnitEnum|string|null $navigationGroup = 'Conteúdo';
     protected static ?int $navigationSort = 1;
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema([
+        return $schema->components([
             Forms\Components\Section::make('Informações principais')->schema([
                 Forms\Components\TextInput::make('title')
                     ->label('Título')
