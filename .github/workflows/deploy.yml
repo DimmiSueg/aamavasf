@@ -40,7 +40,7 @@ jobs:
           node-version: '20'
 
       - name: Instalar dependências Node
-        run: npm install --no-audit --no-fund
+        run: npm install --no-audit --no-fund --legacy-peer-deps
 
       - name: Build assets (Vite)
         run: npm run build
