@@ -7,6 +7,7 @@ use App\Models\Event;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -24,7 +25,7 @@ class EventResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Section::make('Informações do evento')->schema([
+            Schemas\Components\Section::make('Informações do evento')->schema([
                 Forms\Components\TextInput::make('title')
                     ->label('Título')
                     ->required()
@@ -38,7 +39,7 @@ class EventResource extends Resource
                     ->columnSpanFull(),
             ]),
 
-            Forms\Components\Section::make('Data e Local')->schema([
+            Schemas\Components\Section::make('Data e Local')->schema([
                 Forms\Components\DateTimePicker::make('date')
                     ->label('Data e hora de início')
                     ->required(),
@@ -56,7 +57,7 @@ class EventResource extends Resource
                     ->maxLength(255),
             ])->columns(2),
 
-            Forms\Components\Section::make('Detalhes adicionais')->schema([
+            Schemas\Components\Section::make('Detalhes adicionais')->schema([
                 Forms\Components\Toggle::make('is_free')
                     ->label('Evento gratuito')
                     ->default(true),

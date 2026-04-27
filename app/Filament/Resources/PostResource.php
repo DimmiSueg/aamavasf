@@ -7,6 +7,7 @@ use App\Models\Post;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -25,7 +26,7 @@ class PostResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Section::make('Informações principais')->schema([
+            Schemas\Components\Section::make('Informações principais')->schema([
                 Forms\Components\TextInput::make('title')
                     ->label('Título')
                     ->required()
@@ -47,14 +48,14 @@ class PostResource extends Resource
                     ->columnSpanFull(),
             ])->columns(2),
 
-            Forms\Components\Section::make('Conteúdo')->schema([
+            Schemas\Components\Section::make('Conteúdo')->schema([
                 Forms\Components\RichEditor::make('content')
                     ->label('Conteúdo')
                     ->required()
                     ->columnSpanFull(),
             ]),
 
-            Forms\Components\Section::make('Publicação')->schema([
+            Schemas\Components\Section::make('Publicação')->schema([
                 Forms\Components\Select::make('category')
                     ->label('Categoria')
                     ->options([

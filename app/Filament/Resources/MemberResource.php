@@ -7,6 +7,7 @@ use App\Models\Member;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -24,14 +25,14 @@ class MemberResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Section::make('Dados pessoais')->schema([
+            Schemas\Components\Section::make('Dados pessoais')->schema([
                 Forms\Components\TextInput::make('name')->label('Nome completo')->required(),
                 Forms\Components\TextInput::make('email')->label('E-mail')->email()->required(),
                 Forms\Components\TextInput::make('phone')->label('Telefone / WhatsApp')->required(),
                 Forms\Components\TextInput::make('city')->label('Cidade'),
             ])->columns(2),
 
-            Forms\Components\Section::make('Participação')->schema([
+            Schemas\Components\Section::make('Participação')->schema([
                 Forms\Components\Select::make('role')
                     ->label('Como quer contribuir')
                     ->options([
