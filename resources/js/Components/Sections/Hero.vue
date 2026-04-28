@@ -108,7 +108,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 // ── Estrelas ──────────────────────────────────────────────
 function rand(min, max) { return Math.random() * (max - min) + min }
 
-const stars = Array.from({ length: 90 }, (_, i) => ({
+const stars = Array.from({ length: 200 }, (_, i) => ({
     id:       i,
     left:     rand(0, 100),
     top:      rand(0, 100),
