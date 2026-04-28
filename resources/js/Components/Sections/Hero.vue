@@ -12,6 +12,23 @@
             <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-blue-900/40 blur-3xl" />
         </div>
 
+        <!-- Estrelas brilhantes -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div
+                v-for="star in stars"
+                :key="star.id"
+                class="absolute rounded-full bg-white"
+                :style="{
+                    left: star.left + '%',
+                    top:  star.top  + '%',
+                    width:  star.size + 'px',
+                    height: star.size + 'px',
+                    boxShadow: star.glow ? `0 0 ${star.size * 2}px ${star.size}px rgba(255,255,255,0.6)` : 'none',
+                    animation: `twinkle ${star.duration}s ${star.delay}s infinite ease-in-out`,
+                }"
+            />
+        </div>
+
         <!-- Gradiente protetor do texto — cobre a esquerda, abre a direita -->
         <div class="absolute inset-0 pointer-events-none z-[1] hidden lg:block"
              style="background: linear-gradient(to right, #1B2A6B 38%, #1B2A6Bcc 52%, transparent 72%)" />
@@ -86,6 +103,19 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+
+// ── Estrelas ──────────────────────────────────────────────
+function rand(min, max) { return Math.random() * (max - min) + min }
+
+const stars = Array.from({ length: 90 }, (_, i) => ({
+    id:       i,
+    left:     rand(0, 100),
+    top:      rand(0, 100),
+    size:     rand(1, i % 8 === 0 ? 5 : 2.5),   // algumas maiores
+    duration: rand(2, 5),
+    delay:    rand(0, 6),
+    glow:     i % 8 === 0,                        // 1 em 8 tem brilho extra
+}))
 
 // ── Parallax ──────────────────────────────────────────────
 const heroRef = ref(null)
@@ -210,5 +240,10 @@ onUnmounted(() => observer?.disconnect())
 
 .girl-float {
     animation: float 4s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0;    transform: scale(0.3); }
+    50%       { opacity: 0.9; transform: scale(1);   }
 }
 </style>
