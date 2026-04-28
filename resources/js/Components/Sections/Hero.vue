@@ -127,6 +127,17 @@ const pieces = [
     { id:  9, pos: { bottom: '6%', left: '14%'  }, size: '52px',  rotation:  80, dx: -35, dy:  25 },
     { id: 10, pos: { top: '75%',   left: '50%'  }, size: '38px',  rotation: -25, dx:  20, dy:  35 },
     { id: 12, pos: { bottom: '10%',left: '40%'  }, size: '50px',  rotation: -70, dx:  25, dy: -30 },
+    // Minúsculas — lado direito livre
+    { id: 17, pos: { top: '22%',   left: '55%'  }, size: '24px',  rotation:  35, dx: -28, dy:  18 },
+    { id: 18, pos: { top: '32%',   right: '28%' }, size: '20px',  rotation: -60, dx:  22, dy: -22 },
+    { id: 19, pos: { top: '50%',   right: '42%' }, size: '26px',  rotation:  15, dx: -18, dy:  28 },
+    { id: 20, pos: { top: '42%',   right: '15%' }, size: '22px',  rotation:  75, dx:  30, dy: -15 },
+    { id: 21, pos: { top: '65%',   left: '58%'  }, size: '28px',  rotation: -40, dx: -25, dy:  20 },
+    { id: 22, pos: { bottom: '28%',right: '10%' }, size: '20px',  rotation:  50, dx:  20, dy:  25 },
+    { id: 23, pos: { top: '78%',   right: '32%' }, size: '24px',  rotation: -20, dx: -30, dy: -18 },
+    { id: 24, pos: { top: '18%',   right: '10%' }, size: '22px',  rotation:  85, dx:  25, dy: -30 },
+    { id: 25, pos: { top: '55%',   left: '68%'  }, size: '18px',  rotation: -55, dx: -20, dy:  22 },
+    { id: 26, pos: { bottom: '18%',left: '62%'  }, size: '26px',  rotation:  30, dx:  28, dy: -20 },
 ]
 
 function pieceStyle(piece) {
