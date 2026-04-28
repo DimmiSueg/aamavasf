@@ -27,10 +27,12 @@
                 </a>
             </div>
 
-            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-                <div v-for="stat in stats" :key="stat.label" class="text-center">
-                    <div class="text-3xl font-extrabold text-yellow-400">{{ stat.number }}</div>
-                    <div class="text-white/70 text-sm mt-1">{{ stat.label }}</div>
+            <div ref="statsRef" class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+                <div v-for="(stat, i) in stats" :key="stat.label" class="text-center">
+                    <div class="text-4xl font-extrabold text-yellow-400 tabular-nums">
+                        {{ stat.prefix }}{{ counts[i] }}{{ stat.suffix }}
+                    </div>
+                    <div class="text-white/70 text-sm mt-2 leading-snug">{{ stat.label }}</div>
                 </div>
             </div>
         </div>
@@ -44,10 +46,52 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
 const stats = [
-    { number: '1 em 44', label: 'crianças são autistas' },
-    { number: '2M+', label: 'pessoas com autismo no Brasil' },
-    { number: '100%', label: 'sem fins lucrativos' },
-    { number: 'VSF', label: 'Vale do São Francisco' },
+    { target: 50,  prefix: '+', suffix: '',  label: 'crianças e adolescentes atendidos' },
+    { target: 100, prefix: '+', suffix: '',  label: 'famílias apoiadas' },
+    { target: 5,   prefix: '',  suffix: '',  label: 'anos de atuação' },
+    { target: 30,  prefix: '+', suffix: '',  label: 'voluntários' },
 ]
+
+const counts = ref(stats.map(() => 0))
+const statsRef = ref(null)
+let observer = null
+
+function animateCounters() {
+    const duration = 2000
+    const steps = 60
+
+    stats.forEach((stat, i) => {
+        const stepTime = duration / steps
+        const stepValue = stat.target / steps
+        let current = 0
+
+        const timer = setInterval(() => {
+            current += stepValue
+            if (current >= stat.target) {
+                counts.value[i] = stat.target
+                clearInterval(timer)
+            } else {
+                counts.value[i] = Math.floor(current)
+            }
+        }, stepTime)
+    })
+}
+
+onMounted(() => {
+    observer = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) {
+                animateCounters()
+                observer.disconnect()
+            }
+        },
+        { threshold: 0.4 }
+    )
+    if (statsRef.value) observer.observe(statsRef.value)
+})
+
+onUnmounted(() => observer?.disconnect())
 </script>
