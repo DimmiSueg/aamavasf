@@ -12,19 +12,19 @@
             <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-blue-900/40 blur-3xl" />
         </div>
 
-        <!-- Puzzle pieces (desktop only) -->
+        <!-- Puzzle pieces (large desktop only) -->
         <img
             v-for="piece in pieces"
             :key="piece.id"
             src="/images/peca.png"
             alt=""
-            class="absolute pointer-events-none select-none hidden md:block"
+            class="absolute pointer-events-none select-none hidden lg:block"
             :style="pieceStyle(piece)"
         />
 
-        <!-- Girl illustration (desktop only) — wrapper handles parallax, img handles float -->
+        <!-- Girl illustration (large desktop only) — wrapper handles parallax, img handles float -->
         <div
-            class="absolute bottom-0 right-0 pointer-events-none select-none hidden md:block"
+            class="absolute bottom-0 right-0 pointer-events-none select-none hidden lg:block"
             :style="girlWrapperStyle"
         >
             <img
@@ -100,25 +100,29 @@ function resetMouse() {
 }
 
 // Puzzle pieces — pos, size, rotation, depth (dx/dy)
+// Área protegida do texto: left 0–46%, top 15–68%
+// Peças ficam nas bordas ou na metade direita (left > 48%)
 const pieces = [
-    // Peças grandes (já existentes)
-    { id:  1, pos: { top: '8%',    left: '4%'   }, size: '110px', rotation: -20, dx:  45, dy:  30 },
-    { id:  2, pos: { top: '4%',    left: '40%'  }, size: '72px',  rotation:  50, dx: -30, dy:  20 },
-    { id:  3, pos: { top: '38%',   left: '1%'   }, size: '92px',  rotation:  15, dx:  55, dy: -25 },
-    { id:  4, pos: { bottom: '22%',left: '8%'   }, size: '82px',  rotation: -40, dx: -45, dy:  35 },
-    { id:  5, pos: { top: '10%',   right: '3%'  }, size: '100px', rotation:  65, dx:  35, dy: -45 },
-    { id:  6, pos: { bottom: '32%',right: '37%' }, size: '62px',  rotation: -10, dx: -20, dy:  30 },
-    // Peças menores para preencher os vazios
-    { id:  7, pos: { top: '20%',   left: '22%'  }, size: '48px',  rotation:  30, dx: -25, dy:  20 },
-    { id:  8, pos: { top: '55%',   left: '30%'  }, size: '42px',  rotation: -55, dx:  30, dy: -20 },
-    { id:  9, pos: { top: '70%',   left: '18%'  }, size: '52px',  rotation:  80, dx: -35, dy:  25 },
-    { id: 10, pos: { top: '45%',   left: '48%'  }, size: '38px',  rotation: -25, dx:  20, dy:  35 },
-    { id: 11, pos: { top: '15%',   left: '60%'  }, size: '44px',  rotation:  40, dx: -40, dy: -20 },
-    { id: 12, pos: { bottom: '10%',left: '38%'  }, size: '50px',  rotation: -70, dx:  25, dy: -30 },
-    { id: 13, pos: { bottom: '15%',right: '20%' }, size: '40px',  rotation:  20, dx: -30, dy:  20 },
-    { id: 14, pos: { top: '30%',   left: '35%'  }, size: '36px',  rotation: -45, dx:  40, dy:  15 },
-    { id: 15, pos: { top: '60%',   right: '28%' }, size: '46px',  rotation:  55, dx: -20, dy: -35 },
-    { id: 16, pos: { top: '3%',    right: '20%' }, size: '40px',  rotation: -30, dx:  30, dy:  25 },
+    // Extremo esquerdo — fora da caixa de texto
+    { id:  1, pos: { top: '7%',    left: '2%'   }, size: '110px', rotation: -20, dx:  45, dy:  30 },
+    { id:  3, pos: { top: '42%',   left: '0%'   }, size: '92px',  rotation:  15, dx:  55, dy: -25 },
+    { id:  4, pos: { bottom: '20%',left: '4%'   }, size: '82px',  rotation: -40, dx: -45, dy:  35 },
+    { id:  7, pos: { top: '24%',   left: '2%'   }, size: '48px',  rotation:  30, dx: -25, dy:  20 },
+    // Topo — abaixo do navbar (top ≥ 11%)
+    { id:  2, pos: { top: '13%',   left: '46%'  }, size: '72px',  rotation:  50, dx: -30, dy:  20 },
+    { id: 16, pos: { top: '11%',   right: '18%' }, size: '40px',  rotation: -30, dx:  30, dy:  25 },
+    // Metade direita — área livre ao lado da menina
+    { id:  5, pos: { top: '9%',    right: '3%'  }, size: '100px', rotation:  65, dx:  35, dy: -45 },
+    { id:  6, pos: { bottom: '30%',right: '36%' }, size: '62px',  rotation: -10, dx: -20, dy:  30 },
+    { id: 11, pos: { top: '20%',   left: '62%'  }, size: '44px',  rotation:  40, dx: -40, dy: -20 },
+    { id: 14, pos: { top: '38%',   left: '52%'  }, size: '36px',  rotation: -45, dx:  40, dy:  15 },
+    { id: 15, pos: { top: '58%',   right: '24%' }, size: '46px',  rotation:  55, dx: -20, dy: -35 },
+    { id: 13, pos: { bottom: '16%',right: '16%' }, size: '40px',  rotation:  20, dx: -30, dy:  20 },
+    // Base — abaixo dos botões (top ≥ 70%)
+    { id:  8, pos: { top: '72%',   left: '28%'  }, size: '42px',  rotation: -55, dx:  30, dy: -20 },
+    { id:  9, pos: { bottom: '6%', left: '14%'  }, size: '52px',  rotation:  80, dx: -35, dy:  25 },
+    { id: 10, pos: { top: '75%',   left: '50%'  }, size: '38px',  rotation: -25, dx:  20, dy:  35 },
+    { id: 12, pos: { bottom: '10%',left: '40%'  }, size: '50px',  rotation: -70, dx:  25, dy: -30 },
 ]
 
 function pieceStyle(piece) {
@@ -127,6 +131,7 @@ function pieceStyle(piece) {
     return {
         ...piece.pos,
         width: piece.size,
+        zIndex: 0,
         transform: `translate(${px}px, ${py}px) rotate(${piece.rotation}deg)`,
         transition: 'transform 0.18s ease-out',
         willChange: 'transform',
