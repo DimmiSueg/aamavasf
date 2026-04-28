@@ -111,10 +111,10 @@ const stars = Array.from({ length: 90 }, (_, i) => ({
     id:       i,
     left:     rand(0, 100),
     top:      rand(0, 100),
-    size:     rand(1, i % 8 === 0 ? 5 : 2.5),   // algumas maiores
-    duration: rand(2, 5),
-    delay:    rand(0, 6),
-    glow:     i % 8 === 0,                        // 1 em 8 tem brilho extra
+    size:     rand(1.5, i % 8 === 0 ? 5 : 3),
+    duration: rand(1.5, 3.5),   // mais rápido — pisca perceptível
+    delay:    rand(0, 8),
+    glow:     i % 8 === 0,
 }))
 
 // ── Parallax ──────────────────────────────────────────────
@@ -243,7 +243,8 @@ onUnmounted(() => observer?.disconnect())
 }
 
 @keyframes twinkle {
-    0%, 100% { opacity: 0;    transform: scale(0.3); }
-    50%       { opacity: 0.9; transform: scale(1);   }
+    0%, 35%, 100% { opacity: 0;    transform: scale(0.2); }
+    50%           { opacity: 1;    transform: scale(1);   }
+    65%           { opacity: 0.15; transform: scale(0.5); }
 }
 </style>
