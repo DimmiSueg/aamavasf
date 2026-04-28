@@ -12,6 +12,10 @@
             <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-blue-900/40 blur-3xl" />
         </div>
 
+        <!-- Gradiente protetor do texto — cobre a esquerda, abre a direita -->
+        <div class="absolute inset-0 pointer-events-none z-[1] hidden lg:block"
+             style="background: linear-gradient(to right, #1B2A6B 38%, #1B2A6Bcc 52%, transparent 72%)" />
+
         <!-- Puzzle pieces (large desktop only) -->
         <img
             v-for="piece in pieces"
