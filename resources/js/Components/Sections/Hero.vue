@@ -101,12 +101,24 @@ function resetMouse() {
 
 // Puzzle pieces — pos, size, rotation, depth (dx/dy)
 const pieces = [
-    { id: 1, pos: { top: '8%',    left: '4%'   }, size: '110px', rotation: -20, dx:  45, dy:  30 },
-    { id: 2, pos: { top: '4%',    left: '40%'  }, size: '72px',  rotation:  50, dx: -30, dy:  20 },
-    { id: 3, pos: { top: '38%',   left: '1%'   }, size: '92px',  rotation:  15, dx:  55, dy: -25 },
-    { id: 4, pos: { bottom: '22%',left: '8%'   }, size: '82px',  rotation: -40, dx: -45, dy:  35 },
-    { id: 5, pos: { top: '10%',   right: '3%'  }, size: '100px', rotation:  65, dx:  35, dy: -45 },
-    { id: 6, pos: { bottom: '32%',right: '37%' }, size: '62px',  rotation: -10, dx: -20, dy:  30 },
+    // Peças grandes (já existentes)
+    { id:  1, pos: { top: '8%',    left: '4%'   }, size: '110px', rotation: -20, dx:  45, dy:  30 },
+    { id:  2, pos: { top: '4%',    left: '40%'  }, size: '72px',  rotation:  50, dx: -30, dy:  20 },
+    { id:  3, pos: { top: '38%',   left: '1%'   }, size: '92px',  rotation:  15, dx:  55, dy: -25 },
+    { id:  4, pos: { bottom: '22%',left: '8%'   }, size: '82px',  rotation: -40, dx: -45, dy:  35 },
+    { id:  5, pos: { top: '10%',   right: '3%'  }, size: '100px', rotation:  65, dx:  35, dy: -45 },
+    { id:  6, pos: { bottom: '32%',right: '37%' }, size: '62px',  rotation: -10, dx: -20, dy:  30 },
+    // Peças menores para preencher os vazios
+    { id:  7, pos: { top: '20%',   left: '22%'  }, size: '48px',  rotation:  30, dx: -25, dy:  20 },
+    { id:  8, pos: { top: '55%',   left: '30%'  }, size: '42px',  rotation: -55, dx:  30, dy: -20 },
+    { id:  9, pos: { top: '70%',   left: '18%'  }, size: '52px',  rotation:  80, dx: -35, dy:  25 },
+    { id: 10, pos: { top: '45%',   left: '48%'  }, size: '38px',  rotation: -25, dx:  20, dy:  35 },
+    { id: 11, pos: { top: '15%',   left: '60%'  }, size: '44px',  rotation:  40, dx: -40, dy: -20 },
+    { id: 12, pos: { bottom: '10%',left: '38%'  }, size: '50px',  rotation: -70, dx:  25, dy: -30 },
+    { id: 13, pos: { bottom: '15%',right: '20%' }, size: '40px',  rotation:  20, dx: -30, dy:  20 },
+    { id: 14, pos: { top: '30%',   left: '35%'  }, size: '36px',  rotation: -45, dx:  40, dy:  15 },
+    { id: 15, pos: { top: '60%',   right: '28%' }, size: '46px',  rotation:  55, dx: -20, dy: -35 },
+    { id: 16, pos: { top: '3%',    right: '20%' }, size: '40px',  rotation: -30, dx:  30, dy:  25 },
 ]
 
 function pieceStyle(piece) {
