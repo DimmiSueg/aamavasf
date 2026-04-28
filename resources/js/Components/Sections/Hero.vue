@@ -17,14 +17,15 @@
             <div
                 v-for="star in stars"
                 :key="star.id"
-                class="absolute rounded-full bg-white"
+                class="star-particle"
                 :style="{
-                    left: star.left + '%',
-                    top:  star.top  + '%',
+                    left:   star.left + '%',
+                    top:    star.top  + '%',
                     width:  star.size + 'px',
                     height: star.size + 'px',
+                    '--dur': star.duration + 's',
+                    '--del': star.delay + 's',
                     boxShadow: star.glow ? `0 0 ${star.size * 2}px ${star.size}px rgba(255,255,255,0.6)` : 'none',
-                    animation: `twinkle ${star.duration}s ${star.delay}s infinite ease-in-out`,
                 }"
             />
         </div>
@@ -232,19 +233,28 @@ onMounted(() => {
 onUnmounted(() => observer?.disconnect())
 </script>
 
-<style scoped>
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50%       { transform: translateY(-20px); }
-}
-
-.girl-float {
-    animation: float 4s ease-in-out infinite;
-}
-
+<!-- keyframes globais — não podem ser scoped ou o nome fica inacessível no inline style -->
+<style>
 @keyframes twinkle {
     0%, 35%, 100% { opacity: 0;    transform: scale(0.2); }
     50%           { opacity: 1;    transform: scale(1);   }
     65%           { opacity: 0.15; transform: scale(0.5); }
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-20px); }
+}
+</style>
+
+<style scoped>
+.star-particle {
+    position: absolute;
+    border-radius: 9999px;
+    background: white;
+    animation: twinkle var(--dur) var(--del) infinite;
+}
+
+.girl-float {
+    animation: float 4s ease-in-out infinite;
 }
 </style>
